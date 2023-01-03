@@ -124,33 +124,32 @@ public class Solver {
         return new ArrayList<int[]>();
     }
 
-    private static int[] applyMove(int[] soluzione, int indicePrimoElemento) {
-        int[] soluzioneConMossa = new int[soluzione.length];
-        for (int i = 0; i < soluzione.length; i++) {
-            soluzioneConMossa[i] = soluzione[i];
+    private static int[] applyMove(int[] solution, int indexFirstElement) {
+        int[] solutionWithMove = new int[solution.length];
+        for (int i = 0; i < solution.length; i++) {
+            solutionWithMove[i] = solution[i];
         }
-        int indiceSecondoElemento;
-        if (indicePrimoElemento == 5)
-            indiceSecondoElemento = 0;
+        int indexSecondElement;
+        if (indexFirstElement == 5)
+            indexSecondElement = 0;
         else
-            indiceSecondoElemento = indicePrimoElemento + 1;
+            indexSecondElement = indexFirstElement + 1;
 
 
-        int temp = soluzione[indicePrimoElemento];
-        soluzioneConMossa[indicePrimoElemento] = soluzione[indiceSecondoElemento];
-        soluzioneConMossa[indiceSecondoElemento] = temp;
+        int temp = solution[indexFirstElement];
+        solutionWithMove[indexFirstElement] = solution[indexSecondElement];
+        solutionWithMove[indexSecondElement] = temp;
 
-        return soluzioneConMossa;
+        return solutionWithMove;
     }
 
-    private static boolean checkIfTabuOK(int[] soluzioneTemporaneaConMossa, ArrayList<int[]> tabuList) {
-        int indicePerControllo;
+    private static boolean checkIfTabuOK(int[] tempSolutionWithMove, ArrayList<int[]> tabuList) {
         for (int i = 0; i < tabuList.size(); i++) {
-            int lavoroTabu = tabuList.get(i)[0];
-            int indiceTabu = tabuList.get(i)[1];
+            int tabuJob = tabuList.get(i)[0];
+            int tabuIndex = tabuList.get(i)[1];
 
-            int lavoroPerControllo = soluzioneTemporaneaConMossa[indiceTabu];
-            if (lavoroPerControllo == lavoroTabu) {
+            int jobForCheck = tempSolutionWithMove[tabuIndex];
+            if (jobForCheck == tabuJob) {
                 return false;
             }
         }
